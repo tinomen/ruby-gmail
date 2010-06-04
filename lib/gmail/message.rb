@@ -1,5 +1,6 @@
 class Gmail
   class Message
+    attr_reader :mail
     def initialize(gmail, mailbox, uid)
       @gmail = gmail
       @mailbox = mailbox
@@ -82,14 +83,18 @@ class Gmail
       move_to('[Gmail]/All Mail')
     end
 
+    def save_attachments_to(path=nil)
+      attachments.each {|a| a.save_to_file(path) }
+    end
+
     private
 
     # Parsed MIME message object
     def message
-      return @message if @message
+      return @mail if @mail
       require 'mail'
       _body = @gmail.in_mailbox(@mailbox) { @gmail.imap.uid_fetch(uid, "RFC822")[0].attr["RFC822"] }
-      @message = Mail.new(_body)
+      @mail = Mail.new(_body)
     end
 
     # Delegate all other methods to the Mail message
