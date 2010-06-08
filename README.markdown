@@ -90,8 +90,8 @@ A Rubyesque interface to Gmail, with all the tools you'll need. Search, read and
     # Save all attachments in the "Faxes" label to a folder
     folder = "/where/ever"
     gmail.mailbox("Faxes").emails.each do |email|
-      if !email.message.attachments.empty?
-        email.message.save_attachments_to(folder)
+      if !email.attachments.empty?
+        email.save_attachments_to(folder)
       end
     end
 
