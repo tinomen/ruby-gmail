@@ -1,1 +1,1 @@
-require 'ruby-gmail'
+require 'gmail'
