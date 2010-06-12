@@ -1,7 +1,7 @@
 require 'net/imap'
 
 class Gmail
-  VERSION = '0.0.9'
+  VERSION = '0.2.1'
 
   class NoLabel < RuntimeError; end
 
@@ -50,7 +50,7 @@ class Gmail
 
   # gmail.label(name)
   def label(name)
-    mailboxes[name] ||= Mailbox.new(self, mailbox)
+    mailboxes[name] ||= Mailbox.new(self, name)
   end
   alias :mailbox :label
 
